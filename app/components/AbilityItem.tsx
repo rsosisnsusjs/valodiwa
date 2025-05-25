@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 type Ability = {
   displayName: string
@@ -18,10 +19,12 @@ export default function AbilityItem({ ability }: { ability: Ability }) {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <img
+      <Image
         src={ability.displayIcon}
         alt={ability.displayName}
-        className="w-10 h-10 transition-transform duration-200 ease-in-out"
+        width={40}
+        height={40}
+        className="transition-transform duration-200 ease-in-out"
       />
       <span className="text-lg font-semibold mt-2">{ability.displayName}</span>
 

@@ -28,9 +28,11 @@ async function getBundle(uuid: string): Promise<Bundle | null> {
 export default async function BundleDetailPage({
   params,
 }: {
-  params: { uuid: string };
+  params: Promise<{ uuid: string }>;
 }) {
-  const bundle = await getBundle(params.uuid);
+  const { uuid } = await params;
+  
+  const bundle = await getBundle(uuid);
 
   if (!bundle) return notFound();
 
