@@ -1,5 +1,6 @@
 import AgentDetail from '@/app/components/AgentDetail'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 
 interface Role {
   displayName: string
@@ -36,35 +37,31 @@ async function getAgents(): Promise<Agent[]> {
   return data.data
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const res = await fetch(
-    'https://valorant-api.com/v1/agents?language=th-TH&isPlayableCharacter=true',
-    { cache: 'no-store' }
-  )
+export async function generateMetadata(
+  { params }: { params: { slug: string } }
+): Promise<Metadata> {
+  try {
+    const agents = await getAgents()
+    const agent = agents.find(
+      (a) => a.displayName.toLowerCase() === decodeURIComponent(params.slug).toLowerCase()
+    )
 
-  if (!res.ok) {
-    return {
-      title: 'Agent Not Found | VALODIWA',
-      description: 'Agent Not Found',
+    if (!agent) {
+      return {
+        title: 'Agent Not Found | VALODIWA',
+        description: 'Agent Not Found',
+      }
     }
-  }
 
-  const data = await res.json()
-  const agent = data.data.find(
-    (a: any) =>
-      a.displayName.toLowerCase() === decodeURIComponent(params.slug).toLowerCase()
-  )
-
-  if (!agent) {
     return {
-      title: 'Agent Not Found | VALODIWA',
-      description: 'Agent Not Found',
+      title: `${agent.displayName} | VALODIWA`,
+      description: agent.description || agent.displayName,
     }
-  }
-
-  return {
-    title: `${agent.displayName} | VALODIWA`,
-    description: agent.description || `${agent.displayName}`,
+  } catch (err) {
+    return {
+      title: 'Error | VALODIWA',
+      description: 'An error occurred while fetching agent data.',
+    }
   }
 }
 

@@ -59,6 +59,7 @@ export async function generateMetadata({ params }: { params: { uuid: string } })
       },
     };
   } catch (error) {
+    console.error("Error fetching bundle metadata:", error);
     return {
       title: "Bundle Error | VALODIWA",
       description: "Bundle Error",
