@@ -4,6 +4,9 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import AbilityItem from '@/app/components/AbilityItem'
 import Image from 'next/image'
+import { Righteous } from 'next/font/google'
+
+const righteous = Righteous({ subsets: ['latin'], weight: '400' })
 
 type Ability = {
   slot: string
@@ -56,7 +59,7 @@ export default function AgentDetail({ agent, background }: AgentDetailProps) {
             height={128}
           />
           <div>
-            <h1 className="text-5xl font-extrabold tracking-tight">
+            <h1 className={`text-5xl font-extrabold tracking-tight ${righteous.className}`}>
               {agent.displayName}
             </h1>
             <div className="flex items-center space-x-2">

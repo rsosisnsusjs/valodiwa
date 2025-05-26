@@ -3,6 +3,9 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { Righteous } from 'next/font/google'
+
+const righteous = Righteous({ subsets: ['latin'], weight: '400' })
 
 type AgentCardProps = {
   uuid: string
@@ -39,7 +42,7 @@ export default function AgentCard({
             height={96}
             className="mx-auto transition-transform duration-300 hover:scale-110 drop-shadow-lg"
           />
-          <h2 className="text-2xl font-bold mt-2 font-heading">{displayName}</h2>
+          <h2 className={`text-2xl font-bold mt-2 font-heading ${righteous.className}`}>{displayName}</h2>
           {role && (
             <div className="flex items-center gap-2 mt-1 text-sm opacity-90">
               <Image src={role.displayIcon} alt={role.displayName} width={20} height={20} />
