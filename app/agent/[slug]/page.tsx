@@ -38,12 +38,13 @@ async function getAgents(): Promise<Agent[]> {
 }
 
 export async function generateMetadata(
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   try {
+    const { slug } = await params
     const agents = await getAgents()
     const agent = agents.find(
-      (a) => a.displayName.toLowerCase() === decodeURIComponent(params.slug).toLowerCase()
+      (a) => a.displayName.toLowerCase() === decodeURIComponent(slug).toLowerCase()
     )
 
     if (!agent) {
@@ -57,14 +58,14 @@ export async function generateMetadata(
       title: `${agent.displayName} | VALODIWA`,
       description: agent.description || agent.displayName,
     }
-  } catch (err) {
+  } catch (error) {
+    console.error("Error fetching bundle metadata:", error);
     return {
       title: 'Error | VALODIWA',
       description: 'An error occurred while fetching agent data.',
     }
   }
 }
-
 
 export default async function Page({
   params,
@@ -83,7 +84,6 @@ export default async function Page({
   const colors = agent.backgroundGradientColors || ['ffffff', 'eeeeee', 'dddddd', 'cccccc']
   const gradient = `linear-gradient(135deg, #${colors[0]}, #${colors[1]}, #${colors[2]}, #${colors[3]})`
   
-  // กรณี role เป็น null ให้ใส่ค่า default
   const agentWithRole = {
     ...agent,
     role: agent.role ?? { displayName: 'Unknown', displayIcon: '/default-role-icon.png' }

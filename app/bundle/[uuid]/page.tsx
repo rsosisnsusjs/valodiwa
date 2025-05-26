@@ -25,10 +25,11 @@ async function getBundle(uuid: string): Promise<Bundle | null> {
   }
 }
 
-export async function generateMetadata({ params }: { params: { uuid: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ uuid: string }> }) {
   try {
+    const { uuid } = await params;
     const res = await fetch(
-      `https://valorant-api.com/v1/bundles/${params.uuid}?language=th-TH`,
+      `https://valorant-api.com/v1/bundles/${uuid}?language=th-TH`,
       { cache: "no-store" }
     );
 
@@ -66,7 +67,6 @@ export async function generateMetadata({ params }: { params: { uuid: string } })
     };
   }
 }
-
 
 export default async function BundleDetailPage({
   params,
