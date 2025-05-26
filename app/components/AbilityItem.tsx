@@ -89,7 +89,7 @@ export default function AbilityItem({ ability }: { ability: Ability }) {
                     alt={ability.displayName}
                     width={70}
                     height={70}
-                    className="rounded-lg"
+                    className="rounded-lg shadow-lg"
                   />
                 </motion.div>
               )}
