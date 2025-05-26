@@ -22,12 +22,16 @@ async function getBundles(): Promise<Bundle[]> {
   return data.data;
 }
 
+export const metadata = {
+  title: 'Bundles | VALODIWA',
+  description: 'View all Valorant bundles in VALODIWA',
+}
+
 export default async function BundlesPage() {
   const bundles = await getBundles();
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Valorant Bundles</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {bundles.map((bundle) => (
           <BundleCard

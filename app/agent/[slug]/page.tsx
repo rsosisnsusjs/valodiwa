@@ -36,6 +36,39 @@ async function getAgents(): Promise<Agent[]> {
   return data.data
 }
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const res = await fetch(
+    'https://valorant-api.com/v1/agents?language=th-TH&isPlayableCharacter=true',
+    { cache: 'no-store' }
+  )
+
+  if (!res.ok) {
+    return {
+      title: 'Agent Not Found | VALODIWA',
+      description: 'Agent Not Found',
+    }
+  }
+
+  const data = await res.json()
+  const agent = data.data.find(
+    (a: any) =>
+      a.displayName.toLowerCase() === decodeURIComponent(params.slug).toLowerCase()
+  )
+
+  if (!agent) {
+    return {
+      title: 'Agent Not Found | VALODIWA',
+      description: 'Agent Not Found',
+    }
+  }
+
+  return {
+    title: `${agent.displayName} | VALODIWA`,
+    description: agent.description || `${agent.displayName}`,
+  }
+}
+
+
 export default async function Page({
   params,
 }: {

@@ -17,6 +17,11 @@ async function getAgents(): Promise<Agent[]> {
   return data.data
 }
 
+export const metadata = {
+  title: 'Agents | VALODIWA',
+  description: 'View all Valorant agents in VALODIWA',
+}
+
 export default async function AgentsPage() {
   const agents = await getAgents()
 

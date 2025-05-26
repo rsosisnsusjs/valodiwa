@@ -25,6 +25,48 @@ async function getBundle(uuid: string): Promise<Bundle | null> {
   }
 }
 
+export async function generateMetadata({ params }: { params: { uuid: string } }) {
+  try {
+    const res = await fetch(
+      `https://valorant-api.com/v1/bundles/${params.uuid}?language=th-TH`,
+      { cache: "no-store" }
+    );
+
+    if (!res.ok) {
+      return {
+        title: "Bundle Not Found | VALODIWA",
+        description: "Bundle Not Found",
+      };
+    }
+
+    const data = await res.json();
+    const bundle: Bundle = data.data;
+
+    if (!bundle) {
+      return {
+        title: "Bundle Not Found | VALODIWA",
+        description: "Bundle Not Found",
+      };
+    }
+
+    return {
+      title: `${bundle.displayName} | VALODIWA`,
+      description: bundle.extraDescription || `${bundle.displayName}`,
+      openGraph: {
+        title: `${bundle.displayName} | VALODIWA`,
+        description: bundle.extraDescription,
+        images: [bundle.verticalPromoImage || bundle.displayIcon],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Bundle Error | VALODIWA",
+      description: "Bundle Error",
+    };
+  }
+}
+
+
 export default async function BundleDetailPage({
   params,
 }: {

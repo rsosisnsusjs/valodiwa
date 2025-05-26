@@ -21,8 +21,11 @@ const notoThai = Noto_Sans_Thai({
 })
 
 export const metadata = {
-  title: 'Valorant Agent Info',
-  description: 'View details of agents in Thai and English with dynamic background',
+  title: 'VALODIWA',
+  description: 'Valorant All The Time',
+  icons: {
+    icon: '/vk2.png',
+  },
 }
 
 // ✅ Apply className for fonts
