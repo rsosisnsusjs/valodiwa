@@ -67,7 +67,13 @@ export default function Navbar() {
             {navItems.map((item, index) => (
               <Link
                 key={index}
-                href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                href={
+                  item.toLowerCase() === "home"
+                    ? "/"
+                    : item.toLowerCase() === "talon"
+                    ? "/talon/players"
+                    : `/${item.toLowerCase()}`
+                }
                 onClick={() => setIsOpen(false)}
                 className="text-lg font-medium hover:text-red-400 transition-colors"
               >
