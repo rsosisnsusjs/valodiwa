@@ -28,7 +28,7 @@ export default function PlayerCard({ player, getAgentIcon, righteousClass }: Pla
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="border rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer bg-white dark:bg-zinc-900 flex flex-col items-center"
+      className="border rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer bg-zinc-900 dark:bg-zinc-900 flex flex-col items-center"
     >
       <Link href={`/talon/players/${player.player.toLowerCase()}`} className="w-full flex flex-col items-center">
         <div className="w-[160px] h-[100px] rounded-lg overflow-hidden shadow-lg mb-4 relative">

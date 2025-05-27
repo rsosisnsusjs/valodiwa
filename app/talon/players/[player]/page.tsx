@@ -133,7 +133,7 @@ export default function PlayerPage() {
         {/* Animated Picture */}
         <div
           className="relative w-[320px] h-[200px] rounded-xl overflow-hidden shadow-lg p-1
-      transition-all duration-700 ease-in-out group-hover:translate-x-[-120px]"
+      transition-all duration-700 ease-in-out group-hover:translate-x-[-200px]"
         >
           <Image
             src={`/players/${playerData.player
@@ -150,16 +150,24 @@ export default function PlayerPage() {
 
         {/* Animated Name */}
         <h1
-          className={`hidden md:block absolute left-[360px] opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-10
-      transition-all duration-700 text-8xl font-bold text-gray-800 dark:text-white ${righteous.className}`}
+          className={`hidden md:block absolute left-[340px] opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-10
+      transition-all duration-700 text-8xl font-bold text-white dark:text-white ${righteous.className}`}
+        >
+          {playerData.player}
+        </h1>
+        {/* Animated Name */}
+        <h1
+          className={`hidden md:block absolute left-[400px] top-[50px] opacity-0 group-hover:opacity-15 group-hover:translate-x-0 translate-x-10
+      transition-all duration-900 text-8xl font-bold text-red dark:text-red ${righteous.className}`}
         >
           {playerData.player}
         </h1>
       </div>
+      
 
       {/* Player name for mobile - BELOW image */}
       <h1
-        className={`block md:hidden text-3xl font-bold text-center mb-4 text-gray-800 dark:text-white ${righteous.className}`}
+        className={`block md:hidden text-3xl font-bold text-center mb-4 text-white dark:text-white ${righteous.className}`}
       >
         {playerData.player}
       </h1>
@@ -184,7 +192,7 @@ export default function PlayerPage() {
 
         {/* Info */}
         <div className="text-center md:text-left space-y-4 w-full md:w-1/2">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+          <h2 className="text-2xl font-semibold text-white dark:text-white">
             {currentAgent?.displayName || "Agent Not Found"}
           </h2>
           {currentAgent?.role && (
@@ -192,11 +200,11 @@ export default function PlayerPage() {
               <Image
                 src={currentAgent.role.displayIcon}
                 alt={currentAgent.role.displayName}
-                width={24} 
-                height={24} 
-                className="rounded-sm" 
+                width={24}
+                height={24}
+                className="rounded-sm"
               />
-              <span className="text-gray-700 dark:text-gray-300">
+              <span className="text-gray-300 dark:text-gray-300">
                 {currentAgent.role.displayName}
               </span>
             </div>
@@ -206,14 +214,14 @@ export default function PlayerPage() {
             <button
               onClick={handlePrev}
               disabled={!currentAgent}
-              className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50"
             >
               ⬅ Prev
             </button>
             <button
               onClick={handleNext}
               disabled={!currentAgent}
-              className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50"
             >
               Next ➡
             </button>
@@ -222,7 +230,7 @@ export default function PlayerPage() {
       </div>
 
       {/* Stats Section */}
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-800 dark:text-gray-200">
+      <div className="bg-gray-800 dark:bg-gray-800 shadow-md rounded-xl p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-200 dark:text-gray-200">
         {[
           [
             "Agents",
